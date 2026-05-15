@@ -32,8 +32,8 @@ PyTorch communication microbenchmark (`allreduce-stats.py`) via `torchrun`.
 - Fetches the benchmark script at runtime using `curl`
 - Uses `torchrun` rendezvous over Slurm nodes to run multi-node all-reduce
 - Extracts bandwidth results from the benchmark output and reports:
-	- `avg_bw` (GB/s)
-	- `max_bw` (GB/s)
+	- `bandwidth_avg` (GB/s)
+	- `bandwidth_max` (GB/s)
 
 ## ROCm versions - Important note
 
@@ -61,7 +61,7 @@ The aws-ofi plugin is fetched and built as part of the environment setup:
 	- Clone `https://github.com/ROCm/aws-ofi-rccl.git` (deprecated)
 	- Checkout the `cxi` branch
 
-The selection logic lives in `FetchAws.prepare_download()` in [run_pytorch.py](run_pytorch.py).
+The selection logic lives in `FetchAws.configure_clone_source()` in [run_pytorch.py](run_pytorch.py).
 
 ## Runtime PyTorch version discovery
 

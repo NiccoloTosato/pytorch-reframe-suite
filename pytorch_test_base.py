@@ -5,6 +5,12 @@
 # SPDX-License-Identifier: MIT
 import reframe as rfm
 import reframe.utility.sanity as sn
+from reframe.core.builtins import (
+    parameter,
+    performance_function,
+    run_after,
+    sanity_function,
+)
 
 
 class PyTorchTestBase(rfm.RunOnlyRegressionTest):
@@ -19,7 +25,7 @@ class PyTorchTestBase(rfm.RunOnlyRegressionTest):
     tags = {'production'}
 
     @run_after('setup')
-    def setup_test(self):
+    def configure_tasks_and_references(self):
         curr_part = self.current_partition
         print()
         self.num_gpus_per_node = curr_part.select_devices('gpu')[0].num_devices
@@ -37,7 +43,7 @@ class PyTorchTestBase(rfm.RunOnlyRegressionTest):
         self.job.launcher.options += ['-l --gpus-per-task=1']
 
     @sanity_function
-    def assert_job_is_complete(self):
+    def assert_training_completed(self):
         return sn.assert_found(r'Total average', self.stdout)
 
     @performance_function('samples/sec')
