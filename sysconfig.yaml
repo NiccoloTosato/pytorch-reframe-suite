@@ -1,0 +1,20 @@
+systems:
+- name: odo
+  descr: Odo system.
+  hostnames: ['odo\d+']
+  modules_system: lmod
+  partitions:
+  - name: batch
+    descr: Use nodes from the Slurm partition containing MI250X nodes
+    scheduler: slurm
+    launcher: srun
+    # If you care about GPU binding or cores per task, you must set it here, it is not handled by tests
+    # Tests only handle -N/-n/--ntasks-per-node
+    access: ['-A gen243 -p batch']
+    environs: ['pmix_test']
+    devices:
+      - type: gpu
+        num_devices: 8  # Set this to the actual number of GPUs per node (e.g., 8 for MI250X)
+environments:
+- name: pmix_test
+
