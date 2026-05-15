@@ -131,7 +131,10 @@ class BaseSetupPyTorchDdpPipAmd(rfm.RunOnlyRegressionTest,VersionsHandlerPlugin)
 TARGET_ROCM_VER = GetCliVar('rocm_version_pytorch', '7.2')
 TARGET_MOD_VER  = GetCliVar('rocm_version_module', '7.2.0')
 latest_torch_versions = GetLatestPytorch(TARGET_ROCM_VER, count=3)
-print(f"Detected rocm module version: {TARGET_ROCM_VER} \n Detected pytorch rocm version: {TARGET_MOD_VER}")
+print(
+    f"Detected rocm module version: {TARGET_MOD_VER} \n"
+    f"Detected pytorch rocm version: {TARGET_ROCM_VER}"
+)
 print(f"Pytorch version detected {latest_torch_versions}")
 
 SetupPyTorchDdpPipAmd = make_test(
