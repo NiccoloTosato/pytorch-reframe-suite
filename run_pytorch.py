@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Niccolo Tosato niccolo.tosato@yahoo.it
+#
+# SPDX-License-Identifier: MIT
+
 import os
 import re
 import sys
